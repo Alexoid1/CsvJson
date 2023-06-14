@@ -8,8 +8,10 @@
 require 'rubygems'
 require 'csv'
 require 'json'
-require 'orderedhash'
+
 require_relative "csvJson/version"
+
+
 module CsvJson
 
     # convert an input string value to integer or float if applicable
@@ -46,9 +48,43 @@ module CsvJson
             output << JSON.generate(result)
         end
 
+
+
+    end
+
+    def self.to_json(data)
+        for_csv = CSV.parse(data, headers: true, header_converters: :symbol)    
+
+        arr_to_json = for_csv.map(&:to_h).to_json
+        
+        arr=JSON.parse(arr_to_json)
+        
+        puts arr
     end
     
     module_function :parse
     module_function :convert
     
+
 end
+
+puts 'ghfdg'
+
+
+CsvJson.to_json("file,text,number,hex
+test15.csv,AYF,
+test15.csv,HNZjPHZD,,
+test15.csv,D,,
+test15.csv,OorvCJbngB,,
+test15.csv,FHXKhHtDMZjjAKkN,,
+test15.csv,rNuxDu,,
+test15.csv,IUVBXuLCByha,,
+test15.csv,FxruSKnpRppocymDtSFAkfgHXeQbgiCe,,
+test15.csv,nEb,,,,
+test15.csv,AKLU
+test15.csv,SXUXqJqqcRiyXEklhhjA,,
+test15.csv,WufGoffllJJgokHcMuJusiDhqZT,,
+test15.csv,dIllKP,,
+test15.csv,IQCDIEUrjRs,,
+test15.csv,UjkuOrSjBVXTWKuwqSenNpXqaRM,,
+test15.csv,XcGsLnNnTmOATuHtYdOKcNVeZNOJ,,")
